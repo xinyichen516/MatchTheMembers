@@ -66,7 +66,7 @@ public class GameScreen extends AppCompatActivity {
         Collections.shuffle(pairs);
 
         createQuestion(turn);
-        //timer.start();
+        //timer.start(); //THIS IS THE LINE WHERE EVERYTHING BREAKS FOR SOME REASON
         //
         memberPic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,7 +107,7 @@ public class GameScreen extends AppCompatActivity {
                     if (turn < pairs.size()) {
                         turn ++;
                         createQuestion(turn);
-                        //timer.cancel();
+                        //timer.cancel(); //not quite sure if we need to cancel again before starting the timer- didn't get a chance to test it but just in case
                         //timer.start();
                     } else {
                         Toast.makeText(GameScreen.this, "Congrats! You've Finished!", Toast.LENGTH_SHORT).show();
@@ -129,6 +129,8 @@ public class GameScreen extends AppCompatActivity {
                     if (turn < pairs.size()) {
                         turn ++;
                         createQuestion(turn);
+                        //timer.cancel(); //not quite sure if we need to cancel again before starting the timer- didn't get a chance to test it but just in case
+                        //timer.start();
                     } else {
                         Toast.makeText(GameScreen.this, "Congrats! You've Finished!", Toast.LENGTH_SHORT).show();
                     }
@@ -141,6 +143,8 @@ public class GameScreen extends AppCompatActivity {
                     if (turn < pairs.size()) {
                         turn ++;
                         createQuestion(turn);
+                        //timer.cancel(); //not quite sure if we need to cancel again before starting the timer- didn't get a chance to test it but just in case
+                        //timer.start();
                     } else {
                         Toast.makeText(GameScreen.this, "Congrats! You've Finished!", Toast.LENGTH_SHORT).show();
                     }
@@ -160,6 +164,8 @@ public class GameScreen extends AppCompatActivity {
                     if (turn < pairs.size()) {
                         turn ++;
                         createQuestion(turn);
+                        //timer.cancel(); //not quite sure if we need to cancel again before starting the timer- didn't get a chance to test it but just in case
+                        //timer.start();
                     } else {
                         Toast.makeText(GameScreen.this, "Congrats! You've Finished!", Toast.LENGTH_SHORT).show();
                     }
@@ -172,6 +178,8 @@ public class GameScreen extends AppCompatActivity {
                     if (turn < pairs.size()) {
                         turn ++;
                         createQuestion(turn);
+                        //timer.cancel(); //not quite sure if we need to cancel again before starting the timer- didn't get a chance to test it but just in case
+                        //timer.start();
                     } else {
                         Toast.makeText(GameScreen.this, "Congrats! You've Finished!", Toast.LENGTH_SHORT).show();
                     }
@@ -190,6 +198,8 @@ public class GameScreen extends AppCompatActivity {
                     if (turn < pairs.size()) {
                         turn ++;
                         createQuestion(turn);
+                        //timer.cancel(); //not quite sure if we need to cancel again before starting the timer- didn't get a chance to test it but just in case
+                        //timer.start();
                     } else {
                         Toast.makeText(GameScreen.this, "Congrats! You've Finished!", Toast.LENGTH_SHORT).show();
                     }
@@ -202,6 +212,8 @@ public class GameScreen extends AppCompatActivity {
                     if (turn < pairs.size()) {
                         turn ++;
                         createQuestion(turn);
+                        //timer.cancel(); //not quite sure if we need to cancel again before starting the timer- didn't get a chance to test it but just in case
+                        //timer.start();
                     } else {
                         Toast.makeText(GameScreen.this, "Congrats! You've Finished!", Toast.LENGTH_SHORT).show();
                     }
