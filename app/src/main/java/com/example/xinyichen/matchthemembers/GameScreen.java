@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Random;
 
 public class GameScreen extends AppCompatActivity {
-    //TextView timeText;
+    TextView timeText;
     //MyCountDownTimer timer = new MyCountDownTimer(5000,1000);
 
     Button buttonAnswer1, buttonAnswer2, buttonAnswer3, buttonAnswer4;
