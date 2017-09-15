@@ -326,7 +326,7 @@ public class GameScreen extends AppCompatActivity {
         @Override
         public void onTick(long millisUntilFinished) {
             int progress = (int) (millisUntilFinished / 1000);
-            //timeText.setText(progress);
+            timeText.setText(progress);
         }
 
         @Override
