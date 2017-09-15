@@ -21,8 +21,8 @@ import java.util.List;
 import java.util.Random;
 
 public class GameScreen extends AppCompatActivity {
-    TextView timeText;
-    MyCountDownTimer timer = new MyCountDownTimer(5000,1000);
+    //TextView timeText;
+    //MyCountDownTimer timer = new MyCountDownTimer(5000,1000);
 
     Button buttonAnswer1, buttonAnswer2, buttonAnswer3, buttonAnswer4;
     ImageView memberPic;
@@ -40,7 +40,7 @@ public class GameScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_screen);
-        timeText = (TextView)findViewById(R.id.timerTime);
+        //timeText = (TextView)findViewById(R.id.timerTime);
 
         random = new Random();
 
@@ -66,12 +66,12 @@ public class GameScreen extends AppCompatActivity {
         Collections.shuffle(pairs);
 
         createQuestion(turn);
-        timer.start();
+        //timer.start();
         //
         memberPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                timer.cancel(); //don't penalize the player for creating a contact
+                //timer.cancel(); //don't penalize the player for creating a contact
             //Creates a new Intent to insert a new contact
             Intent contactIntent = new Intent(ContactsContract.Intents.Insert.ACTION);
             contactIntent.setType(ContactsContract.RawContacts.CONTENT_TYPE);
@@ -87,7 +87,7 @@ public class GameScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //check correctness of answer, first check wrong then right
-                timer.cancel();
+                //timer.cancel();
                 if (!(buttonAnswer1.getText().toString().equalsIgnoreCase(pairs.get(turn - 1).getMemberName()))) {
                     Toast.makeText(GameScreen.this, "Wrong Answer :(", Toast.LENGTH_SHORT).show();
                     //timer.cancel();
@@ -121,7 +121,7 @@ public class GameScreen extends AppCompatActivity {
         buttonAnswer2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                timer.cancel();
+                //timer.cancel();
                 //check correctness of answer, first check wrong then right
                 if (!(buttonAnswer2.getText().toString().equalsIgnoreCase(pairs.get(turn - 1).getMemberName()))) {
                     Toast.makeText(GameScreen.this, "Wrong Answer :(", Toast.LENGTH_SHORT).show();
@@ -152,7 +152,7 @@ public class GameScreen extends AppCompatActivity {
         buttonAnswer3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                timer.cancel();
+                //timer.cancel();
                 //check correctness of answer, first check wrong then right
                 if (!(buttonAnswer3.getText().toString().equalsIgnoreCase(pairs.get(turn - 1).getMemberName()))) {
                     Toast.makeText(GameScreen.this, "Wrong Answer :(", Toast.LENGTH_SHORT).show();
@@ -326,7 +326,7 @@ public class GameScreen extends AppCompatActivity {
         @Override
         public void onTick(long millisUntilFinished) {
             int progress = (int) (millisUntilFinished / 1000);
-            timeText.setText(progress);
+            //timeText.setText(progress);
         }
 
         @Override
