@@ -11,7 +11,6 @@
         android:layout_width="292dp"
         android:layout_height="48dp"
         android:layout_marginTop="308dp"
-        android:text="Button"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -34,7 +33,6 @@
         android:layout_width="292dp"
         android:layout_height="48dp"
         android:layout_marginTop="368dp"
-        android:text="Button"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -44,7 +42,6 @@
         android:layout_width="292dp"
         android:layout_height="48dp"
         android:layout_marginTop="432dp"
-        android:text="Sharie Wang"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -55,9 +52,35 @@
         android:layout_height="48dp"
         android:layout_marginTop="242dp"
         android:onClick="checkCorrect"
-        android:text="Button"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/scoreText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Score:"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="42dp" />
+
+    <TextView
+        android:id="@+id/scoreNum"
+        android:layout_width="40dp"
+        android:layout_height="27dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center_horizontal"
+        android:text="0"
+        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scoreText" />
 
 </android.support.constraint.ConstraintLayout>

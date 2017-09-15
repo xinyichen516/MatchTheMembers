@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -25,6 +26,9 @@ public class GameScreen extends AppCompatActivity {
 
     Random random;
 
+    private int score = 0;
+    private TextView scoreChanger;
+
     int turn = 1;
 
     @Override
@@ -40,6 +44,8 @@ public class GameScreen extends AppCompatActivity {
         buttonAnswer2 = (Button) findViewById(R.id.choice2);
         buttonAnswer3 = (Button) findViewById(R.id.choice3);
         buttonAnswer4 = (Button) findViewById(R.id.choice4);
+
+        scoreChanger = (TextView) findViewById(R.id.scoreNum);
 
         pairs = new ArrayList<>();
         ImgNameDatabase imgNameDatabase = new ImgNameDatabase();
@@ -86,11 +92,15 @@ public class GameScreen extends AppCompatActivity {
 
                 } else {
 
+                    score ++;
+                    updateScore(score);
+
                     if (turn < pairs.size()) {
                         turn ++;
                         createQuestion(turn);
                     } else {
                         Toast.makeText(GameScreen.this, "Congrats! You've Finished!", Toast.LENGTH_SHORT).show();
+                        finish();
                     }
 
                 }
@@ -112,6 +122,9 @@ public class GameScreen extends AppCompatActivity {
                     }
 
                 } else {
+
+                    score ++;
+                    updateScore(score);
 
                     if (turn < pairs.size()) {
                         turn ++;
@@ -140,6 +153,9 @@ public class GameScreen extends AppCompatActivity {
 
                 } else {
 
+                    score ++;
+                    updateScore(score);
+
                     if (turn < pairs.size()) {
                         turn ++;
                         createQuestion(turn);
@@ -166,6 +182,9 @@ public class GameScreen extends AppCompatActivity {
                     }
 
                 } else {
+
+                    score ++;
+                    updateScore(score);
 
                     if (turn < pairs.size()) {
                         turn ++;
@@ -279,5 +298,9 @@ public class GameScreen extends AppCompatActivity {
                 break;
         }
 
+    }
+
+    private void updateScore(int newScore) {
+        scoreChanger.setText(score + "");
     }
 }
