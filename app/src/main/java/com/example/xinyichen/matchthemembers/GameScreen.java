@@ -100,7 +100,7 @@ public class GameScreen extends AppCompatActivity {
                         createQuestion(turn);
                     } else {
                         Toast.makeText(GameScreen.this, "Congrats! You've Finished!", Toast.LENGTH_SHORT).show();
-                        finish();
+
                     }
 
                 }

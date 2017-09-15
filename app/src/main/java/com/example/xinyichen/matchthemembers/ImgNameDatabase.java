@@ -57,13 +57,14 @@ public class ImgNameDatabase {
 
     String[] cNames = {"Aayush Tyagi", "Abhinav Koppu", "Adhiraj Datar",
                     "Akkshay Khoslaa", "Amy Shen", "Aneesh Jindal", "Ashwin Vaidyanathan",
-                    "Ben Goldberg", "Billy Lu", "Boris Yue", "Edward Liu", "Candice Ye", "Cody Hsieh",
-                    "Daniel Andrews", "Eliot Han", "Emaan Hariri", "Eric Kong", "Jared Gutierrez",
-                    "Jeffrey Zhang", "Jessica Chen", "Julia Luo", "Justin Kim", "Kevin Jiang",
-                    "Krishnan Rajiyah", "Kristin Ho", "Leon Kwak", "Levi Walsh", "Mohit Katyal",
-                    "Mudit Mittal", "Peter Schafhalter", "Radhika Dhomse", "Rochelle Shen",
-                    "Sahil Lamba", "Sarah Tang", "Sayan Paul", "Sharie Wang", "Shiv Kushwah",
-                    "Shreya Reddy", "Shubham Goenka", "Sumukh Shivakumar", "Tarun Khasnavis",
-                    "Victor Sun", "Vidya Ravikumar", "Wilbur Shi", "Young Lin", "Zach Govani"
+                    "Ben Goldberg", "Billy Lu", "Boris Yue", "Candice Ye", "Cody Hsieh",
+                    "Daniel Andrews", "Edward Liu", "Eliot Han", "Emaan Hariri", "Eric Kong",
+                    "Jared Gutierrez", "Jeffrey Zhang", "Jessica Chen", "Julia Luo", "Justin Kim",
+                    "Kevin Jiang", "Krishnan Rajiyah", "Kristin Ho", "Leon Kwak", "Levi Walsh",
+                    "Mohit Katyal", "Mudit Mittal", "Peter Schafhalter", "Radhika Dhomse",
+                    "Rochelle Shen", "Sahil Lamba", "Sarah Tang", "Sayan Paul", "Sharie Wang",
+                    "Shiv Kushwah", "Shreya Reddy", "Shubham Goenka", "Sumukh Shivakumar",
+                    "Tarun Khasnavis", "Victor Sun", "Vidya Ravikumar", "Wilbur Shi", "Young Lin",
+                    "Zach Govani"
     };
 }
