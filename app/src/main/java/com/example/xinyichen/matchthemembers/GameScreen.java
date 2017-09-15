@@ -1,10 +1,13 @@
 package com.example.xinyichen.matchthemembers;
 
+import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.view.CollapsibleActionView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -53,6 +56,19 @@ public class GameScreen extends AppCompatActivity {
         createQuestion(turn);
 
         //
+        memberPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            //Creates a new Intent to insert a new contact
+            Intent contactIntent = new Intent(ContactsContract.Intents.Insert.ACTION);
+            contactIntent.setType(ContactsContract.RawContacts.CONTENT_TYPE);
+            // Gets the name of the currently displayed member
+            String memName = pairs.get(turn - 1).getMemberName();
+            // Executes the new contact creation
+            contactIntent.putExtra(ContactsContract.Intents.Insert.NAME, memName);
+            startActivityForResult(contactIntent, 1);
+            }
+        });
 
         buttonAnswer1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,17 +180,19 @@ public class GameScreen extends AppCompatActivity {
 
     }
 
-    private  void createQuestion(int num) {
+    private  void createQuestion(int qNum) {
         // chooses pic for the question
-        memberPic.setImageResource(pairs.get(num - 1).getImg());
+        memberPic.setImageResource(pairs.get(qNum - 1).getImg());
 
         //decides which button contains the correct answer
         int correctAnswer = random.nextInt(4) + 1;
 
-        int firstButton = num - 1;
+        int firstButton = qNum - 1;
         int secondButton;
         int thirdButton;
         int fourthButton;
+
+        // the variable names may be confusing as the logic is C&Ped.
 
         switch (correctAnswer) {
             case 1:
