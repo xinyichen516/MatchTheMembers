@@ -92,7 +92,7 @@ public class GameScreen extends AppCompatActivity {
             public void onClick(View view) {
 
                 AlertDialog.Builder builder2=new AlertDialog.Builder(GameScreen.this);
-                builder2.setMessage("Are You Sure You Want to Quit?");
+                builder2.setMessage("Are you sure you want to quit?");
                 builder2.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
 
                     @Override
