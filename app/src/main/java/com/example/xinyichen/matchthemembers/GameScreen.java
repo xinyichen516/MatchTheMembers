@@ -93,6 +93,7 @@ public class GameScreen extends AppCompatActivity {
                         {
                             public void onClick(DialogInterface dialog, int id)
                             {
+                                dialog.dismiss();
                                 finish();//just close the dialog window without doing antyhing
                             }
                         }
