@@ -105,12 +105,10 @@ public class GameScreen extends AppCompatActivity {
                 });
 
                 builder2.setNegativeButton("Nope", new DialogInterface.OnClickListener() {
-
                     @Override
 
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        finish();
                     }
 
                 });
