@@ -15,10 +15,6 @@ public class StartScreen extends AppCompatActivity {
 
         Button button = (Button)findViewById(R.id.startButton);
 
-        //Question 3: find a way for the Button to LISTEN ON the CLICKs. Use Google for guidance.
-        //Question 4: every time the button is clicked, create and execute an Intent to go to the
-        // OtherClass.
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

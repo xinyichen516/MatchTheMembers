@@ -1,5 +1,6 @@
 package com.example.xinyichen.matchthemembers;
 
+import android.app.ActionBar;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.CountDownTimer;
@@ -26,7 +27,7 @@ import static java.security.AccessController.getContext;
 
 public class GameScreen extends AppCompatActivity {
     TextView timeText;
-    CountDownTimer timer = new CountDownTimer(5000, 1000){
+    CountDownTimer timer = new CountDownTimer(5100, 1000){
         public void onTick(long millisUntilFinished) {
             timeText.setText("00 : 0" + millisUntilFinished / 1000);
         }
@@ -88,12 +89,38 @@ public class GameScreen extends AppCompatActivity {
 
         exitButton.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View view)
-            {
-                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getApplicationContext());
-                alertBuilder.setTitle("Are you sure you want to quit?")
-                        .setMessage("All progress will be lost.")
-                        .setPositiveButton("Yes!", new DialogInterface.OnClickListener()
+            public void onClick(View view) {
+
+                AlertDialog.Builder builder2=new AlertDialog.Builder(GameScreen.this);
+                builder2.setMessage("Are You Sure You Want to Quit?");
+                builder2.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(), "Thanks for Playing!", Toast.LENGTH_LONG).show();
+                        Intent intentReturn = new Intent(getApplicationContext(), StartScreen.class);
+                        startActivity(intentReturn); //returns to the start screen
+                    }
+
+                });
+
+                builder2.setNegativeButton("Nope", new DialogInterface.OnClickListener() {
+
+                    @Override
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        finish();
+                    }
+
+                });
+
+                builder2.show();
+
+                /*AlertDialog alertDialog = new AlertDialog.Builder(GameScreen.this).create();
+                alertDialog.setTitle("Are you sure you want to quit?");
+                alertDialog.setMessage("All progress will be lost.");
+                alertDialog.setButton(1, "Yes!", new DialogInterface.OnClickListener()
                         {
                             @Override
                             public void onClick(DialogInterface dialog, int id)
@@ -102,8 +129,8 @@ public class GameScreen extends AppCompatActivity {
                                 Intent intentReturn = new Intent(getApplicationContext(), StartScreen.class);
                                 startActivity(intentReturn); //returns to the start screen
                             }
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+                        });
+                        alertDialog.setButton(0, "Cancel", new DialogInterface.OnClickListener()
                         {
                             @Override
                             public void onClick(DialogInterface dialog, int id)
@@ -113,10 +140,10 @@ public class GameScreen extends AppCompatActivity {
                             }
                         }
                         );
-                AlertDialog alertDialog = alertBuilder.create();
-                alertDialog.show();
+                alertDialog.show();*/
             }
         });
+
 
         memberPic.setOnClickListener(new View.OnClickListener() {
             @Override
