@@ -26,7 +26,16 @@ import static java.security.AccessController.getContext;
 
 public class GameScreen extends AppCompatActivity {
     TextView timeText;
-    MyCountDownTimer timer = new MyCountDownTimer(5000,1000);
+    CountDownTimer timer = new CountDownTimer(5000, 1000){
+        public void onTick(long millisUntilFinished) {
+            timeText.setText("00 : 0" + millisUntilFinished / 1000);
+        }
+        public void onFinish() {
+            turn++;
+            createQuestion(turn);
+            timer.start();
+        }
+    };
     Button exitButton;
 
     Button buttonAnswer1, buttonAnswer2, buttonAnswer3, buttonAnswer4;
@@ -45,7 +54,7 @@ public class GameScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_screen);
-        //timeText = (TextView)findViewById(R.id.timerTime);
+        timeText = (TextView)findViewById(R.id.timerTime);
         exitButton = (Button) findViewById(R.id.exitButton);
 
         random = new Random();
@@ -58,6 +67,7 @@ public class GameScreen extends AppCompatActivity {
         buttonAnswer4 = (Button) findViewById(R.id.choice4);
 
         scoreChanger = (TextView) findViewById(R.id.scoreNum);
+        updateScore(score);
 
         pairs = new ArrayList<>();
         ImgNameDatabase imgNameDatabase = new ImgNameDatabase();
@@ -72,7 +82,9 @@ public class GameScreen extends AppCompatActivity {
         Collections.shuffle(pairs);
 
         createQuestion(turn);
-        //timer.start(); //THIS IS THE LINE WHERE EVERYTHING BREAKS FOR SOME REASON
+        timer.start(); //THIS IS THE LINE WHERE EVERYTHING BREAKS FOR SOME REASON
+
+
 
         exitButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -81,23 +93,23 @@ public class GameScreen extends AppCompatActivity {
                 AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getApplicationContext());
                 alertBuilder.setTitle("Are you sure you want to quit?")
                         .setMessage("All progress will be lost.")
-                        .setPositiveButton("Yes, I'm done", new DialogInterface.OnClickListener()
+                        .setPositiveButton("Yes!", new DialogInterface.OnClickListener()
                         {
                             @Override
                             public void onClick(DialogInterface dialog, int id)
                             {
-                                Toast.makeText(GameScreen.this, "Thank You!", Toast.LENGTH_SHORT).show(); //test to try to get things to work
-                                //Intent intent = new Intent(getApplicationContext(), StartScreen.class);
-                                //startActivity(intent); //this should go back to the start screen hopefully?
+                                Toast.makeText(GameScreen.this, "Thank You!", Toast.LENGTH_SHORT).show();
+                                Intent intentReturn = new Intent(getApplicationContext(), StartScreen.class);
+                                startActivity(intentReturn); //returns to the start screen
                             }
                         })
-                        .setNegativeButton("No, I'm staying", new DialogInterface.OnClickListener()
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener()
                         {
                             @Override
                             public void onClick(DialogInterface dialog, int id)
                             {
                                 dialog.dismiss();
-                                finish();//just close the dialog window without doing antyhing
+                                finish();//close the dialog window without doing anything
                             }
                         }
                         );
@@ -109,15 +121,15 @@ public class GameScreen extends AppCompatActivity {
         memberPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //timer.cancel(); //don't penalize the player for creating a contact
-            //Creates a new Intent to insert a new contact
-            Intent contactIntent = new Intent(ContactsContract.Intents.Insert.ACTION);
-            contactIntent.setType(ContactsContract.RawContacts.CONTENT_TYPE);
-            // Gets the name of the currently displayed member
-            String memName = pairs.get(turn - 1).getMemberName();
-            // Executes the new contact creation
-            contactIntent.putExtra(ContactsContract.Intents.Insert.NAME, memName);
-            startActivityForResult(contactIntent, 1);
+                timer.cancel(); //don't penalize the player for creating a contact
+                //Creates a new Intent to insert a new contact
+                Intent contactIntent = new Intent(ContactsContract.Intents.Insert.ACTION);
+                contactIntent.setType(ContactsContract.RawContacts.CONTENT_TYPE);
+                // Gets the name of the currently displayed member
+                String memName = pairs.get(turn - 1).getMemberName();
+                // Executes the new contact creation
+                contactIntent.putExtra(ContactsContract.Intents.Insert.NAME, memName);
+                startActivityForResult(contactIntent, 1);
             }
         });
 
@@ -125,14 +137,13 @@ public class GameScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //check correctness of answer, first check wrong then right
-                //timer.cancel();
+                timer.cancel();
                 if (!(buttonAnswer1.getText().toString().equalsIgnoreCase(pairs.get(turn - 1).getMemberName()))) {
                     Toast.makeText(GameScreen.this, "Wrong Answer :(", Toast.LENGTH_SHORT).show();
-                    //timer.cancel();
                     if (turn < pairs.size()) {
                         turn ++;
                         createQuestion(turn);
-                        //timer.start();
+                        timer.start();
                     } else {
                         Toast.makeText(GameScreen.this, "Congrats! You've Finished!", Toast.LENGTH_SHORT).show();
                     }
@@ -145,8 +156,7 @@ public class GameScreen extends AppCompatActivity {
                     if (turn < pairs.size()) {
                         turn ++;
                         createQuestion(turn);
-                        //timer.cancel(); //not quite sure if we need to cancel again before starting the timer- didn't get a chance to test it but just in case
-                        //timer.start();
+                        timer.start();
                     } else {
                         Toast.makeText(GameScreen.this, "Congrats! You've Finished!", Toast.LENGTH_SHORT).show();
 
@@ -159,7 +169,7 @@ public class GameScreen extends AppCompatActivity {
         buttonAnswer2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //timer.cancel();
+                timer.cancel();
                 //check correctness of answer, first check wrong then right
                 if (!(buttonAnswer2.getText().toString().equalsIgnoreCase(pairs.get(turn - 1).getMemberName()))) {
                     Toast.makeText(GameScreen.this, "Wrong Answer :(", Toast.LENGTH_SHORT).show();
@@ -167,8 +177,7 @@ public class GameScreen extends AppCompatActivity {
                     if (turn < pairs.size()) {
                         turn ++;
                         createQuestion(turn);
-                        //timer.cancel(); //not quite sure if we need to cancel again before starting the timer- didn't get a chance to test it but just in case
-                        //timer.start();
+                        timer.start();
                     } else {
                         Toast.makeText(GameScreen.this, "Congrats! You've Finished!", Toast.LENGTH_SHORT).show();
                     }
@@ -181,8 +190,7 @@ public class GameScreen extends AppCompatActivity {
                     if (turn < pairs.size()) {
                         turn ++;
                         createQuestion(turn);
-                        //timer.cancel(); //not quite sure if we need to cancel again before starting the timer- didn't get a chance to test it but just in case
-                        //timer.start();
+                        timer.start();
                     } else {
                         Toast.makeText(GameScreen.this, "Congrats! You've Finished!", Toast.LENGTH_SHORT).show();
                     }
@@ -194,7 +202,7 @@ public class GameScreen extends AppCompatActivity {
         buttonAnswer3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //timer.cancel();
+                timer.cancel();
                 //check correctness of answer, first check wrong then right
                 if (!(buttonAnswer3.getText().toString().equalsIgnoreCase(pairs.get(turn - 1).getMemberName()))) {
                     Toast.makeText(GameScreen.this, "Wrong Answer :(", Toast.LENGTH_SHORT).show();
@@ -202,10 +210,10 @@ public class GameScreen extends AppCompatActivity {
                     if (turn < pairs.size()) {
                         turn ++;
                         createQuestion(turn);
-                        //timer.cancel(); //not quite sure if we need to cancel again before starting the timer- didn't get a chance to test it but just in case
-                        //timer.start();
+                        timer.start();
                     } else {
-                        Toast.makeText(GameScreen.this, "Congrats! You've Finished!", Toast.LENGTH_SHORT).show();
+                        Collections.shuffle(pairs);
+                        turn = 1;
                     }
 
                 } else {
@@ -216,10 +224,10 @@ public class GameScreen extends AppCompatActivity {
                     if (turn < pairs.size()) {
                         turn ++;
                         createQuestion(turn);
-                        //timer.cancel(); //not quite sure if we need to cancel again before starting the timer- didn't get a chance to test it but just in case
-                        //timer.start();
+                        timer.start();
                     } else {
-                        Toast.makeText(GameScreen.this, "Congrats! You've Finished!", Toast.LENGTH_SHORT).show();
+                        Collections.shuffle(pairs);
+                        turn = 1;
                     }
 
                 }
@@ -236,10 +244,10 @@ public class GameScreen extends AppCompatActivity {
                     if (turn < pairs.size()) {
                         turn ++;
                         createQuestion(turn);
-                        //timer.cancel(); //not quite sure if we need to cancel again before starting the timer- didn't get a chance to test it but just in case
-                        //timer.start();
+                        timer.start();
                     } else {
-                        Toast.makeText(GameScreen.this, "Congrats! You've Finished!", Toast.LENGTH_SHORT).show();
+                        Collections.shuffle(pairs);
+                        turn = 1;
                     }
 
                 } else {
@@ -250,10 +258,10 @@ public class GameScreen extends AppCompatActivity {
                     if (turn < pairs.size()) {
                         turn ++;
                         createQuestion(turn);
-                        //timer.cancel(); //not quite sure if we need to cancel again before starting the timer- didn't get a chance to test it but just in case
-                        //timer.start();
+                        timer.start();
                     } else {
-                        Toast.makeText(GameScreen.this, "Congrats! You've Finished!", Toast.LENGTH_SHORT).show();
+                        Collections.shuffle(pairs);
+                        turn = 1;
                     }
 
                 }
@@ -364,7 +372,7 @@ public class GameScreen extends AppCompatActivity {
     }
 
     private void updateScore(int newScore) {
-        scoreChanger.setText(score + "");
+        scoreChanger.setText("Score: " + score);
     }
 
     public class MyCountDownTimer extends CountDownTimer {

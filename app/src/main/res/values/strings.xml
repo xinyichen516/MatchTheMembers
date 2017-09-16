@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Match the Members</string>
+    <string name="_0">0</string>
+    <string name="quit">Quit</string>
+    <string name="score">Score:</string>
+    <string name="memberimage">memberImage</string>
 </resources>
