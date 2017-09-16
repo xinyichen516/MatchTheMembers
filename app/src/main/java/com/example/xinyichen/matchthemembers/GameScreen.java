@@ -83,14 +83,17 @@ public class GameScreen extends AppCompatActivity {
                         .setMessage("All progress will be lost.")
                         .setPositiveButton("Yes, I'm done", new DialogInterface.OnClickListener()
                         {
+                            @Override
                             public void onClick(DialogInterface dialog, int id)
                             {
-                                Intent intent = new Intent(getApplicationContext(), StartScreen.class);
-                                startActivity(intent); //this should go back to the start screen
+                                Toast.makeText(GameScreen.this, "Thank You!", Toast.LENGTH_SHORT).show(); //test to try to get things to work
+                                //Intent intent = new Intent(getApplicationContext(), StartScreen.class);
+                                //startActivity(intent); //this should go back to the start screen hopefully?
                             }
                         })
                         .setNegativeButton("No, I'm staying", new DialogInterface.OnClickListener()
                         {
+                            @Override
                             public void onClick(DialogInterface dialog, int id)
                             {
                                 dialog.dismiss();
