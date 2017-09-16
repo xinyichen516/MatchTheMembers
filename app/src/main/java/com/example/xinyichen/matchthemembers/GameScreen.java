@@ -1,8 +1,10 @@
 package com.example.xinyichen.matchthemembers;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.CountDownTimer;
 import android.provider.ContactsContract;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.view.CollapsibleActionView;
@@ -20,9 +22,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import static java.security.AccessController.getContext;
+
 public class GameScreen extends AppCompatActivity {
     TextView timeText;
     MyCountDownTimer timer = new MyCountDownTimer(5000,1000);
+    Button exitButton;
 
     Button buttonAnswer1, buttonAnswer2, buttonAnswer3, buttonAnswer4;
     ImageView memberPic;
@@ -41,6 +46,7 @@ public class GameScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_screen);
         //timeText = (TextView)findViewById(R.id.timerTime);
+        exitButton = (Button) findViewById(R.id.exitButton);
 
         random = new Random();
 
@@ -67,7 +73,35 @@ public class GameScreen extends AppCompatActivity {
 
         createQuestion(turn);
         //timer.start(); //THIS IS THE LINE WHERE EVERYTHING BREAKS FOR SOME REASON
-        //
+
+        exitButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view)
+            {
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getApplicationContext());
+                alertBuilder.setTitle("Are you sure you want to quit?")
+                        .setMessage("All progress will be lost.")
+                        .setPositiveButton("Yes, I'm done", new DialogInterface.OnClickListener()
+                        {
+                            public void onClick(DialogInterface dialog, int id)
+                            {
+                                Intent intent = new Intent(getApplicationContext(), StartScreen.class);
+                                startActivity(intent); //this should go back to the start screen
+                            }
+                        })
+                        .setNegativeButton("No, I'm staying", new DialogInterface.OnClickListener()
+                        {
+                            public void onClick(DialogInterface dialog, int id)
+                            {
+                                finish();//just close the dialog window without doing antyhing
+                            }
+                        }
+                        );
+                AlertDialog alertDialog = alertBuilder.create();
+                alertDialog.show();
+            }
+        });
+
         memberPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
